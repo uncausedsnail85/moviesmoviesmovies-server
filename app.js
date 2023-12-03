@@ -8,7 +8,7 @@ import MovieRoutes from "./mongodb/movies/routes.js";
 import UserRoutes from './mongodb/users/routes.js';
 
 // db
-mongoose.connect("mongodb://127.0.0.1:27017/moviesmoviesmovies" || process.env.DB_CONNECTION_STRING);
+mongoose.connect(process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/moviesmoviesmovies" );
 
 // express
 const app = express()
