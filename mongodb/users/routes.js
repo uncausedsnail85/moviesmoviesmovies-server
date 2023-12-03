@@ -1,7 +1,7 @@
 function UserRoutes(app) {
 
     const testUser = {
-        "username": "bryan",
+        "username": "ada",
         "password": "123",
         "email": "b@test.com",
         "role": "ADMIN",
@@ -9,12 +9,20 @@ function UserRoutes(app) {
         "movie_lists": [],
     }
 
-
     // ### User Session ###
     const signin = async (req, res) => {
         const { username, password } = req.body;
         // const currentUser = await dao.findUserByCredentials(username, password);
-        const currentUser = testUser
+        // if (currentUser == null) {
+        //     // handle here or at app???
+        // }
+
+        // ####### temp test case ########
+        const currentUser = username === testUser.username && password === testUser.password ? testUser : null
+        // const currentUser = testUser
+        // console.log(JSON.stringify(currentUser));
+        // ##############################
+
         req.session['currentUser'] = currentUser;
         res.json(currentUser);
     };
