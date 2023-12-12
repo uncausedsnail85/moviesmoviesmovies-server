@@ -6,7 +6,7 @@ import "dotenv/config";
 
 import MovieRoutes from "./mongodb/movies/routes.js";
 import UserRoutes from './mongodb/users/routes.js';
-
+// new comment -sw
 // db
 mongoose.connect(process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/moviesmoviesmovies" );
 
