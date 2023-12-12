@@ -71,7 +71,7 @@ function UserRoutes(app) {
         res.json(user);
     };
     
-    // FIND ALL USERS - SW
+    // FIND ALL USERS - SW 
     const findAllUsers = async (req, res) => {
         const users = await dao.findAllUsers();
         res.json(users);
@@ -98,7 +98,7 @@ function UserRoutes(app) {
         res.json(users);
     };
 
-    // FIND USER BY ROLE - SW  
+    // FIND USER BY ROLE - SW - role for admin is working but not "USER"
     const findUsersByRole = async (req, res) => {
         const role = req.params.role;
         const users = await dao.findUsersByRole(role); 
