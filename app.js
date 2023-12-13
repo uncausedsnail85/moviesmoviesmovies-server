@@ -9,6 +9,7 @@ import LikesRoutes from './likes/routes.js';
 
 
 // db
+// console.log(process.env.DB_CONNECTION_STRING)
 mongoose.connect(process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/moviesmoviesmovies" );
 
 // express
