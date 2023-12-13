@@ -3,10 +3,11 @@ import cors from "cors";
 import session from "express-session";
 import mongoose from "mongoose";
 import "dotenv/config";
-
 import MovieRoutes from "./mongodb/movies/routes.js";
 import UserRoutes from './mongodb/users/routes.js';
-// new comment -sw
+import LikesRoutes from './likes/routes.js';
+
+
 // db
 mongoose.connect(process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/moviesmoviesmovies" );
 
@@ -49,7 +50,7 @@ app.use(express.json());
 app.get('/testresponse', (req, res) => {
     res.send("hello");
 })
-
+LikesRoutes(app);
 MovieRoutes(app);
 UserRoutes(app);
 
