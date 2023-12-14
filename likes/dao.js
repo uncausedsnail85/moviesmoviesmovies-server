@@ -8,11 +8,11 @@ export const findAllLikes = () => model.find();
 
 // USER LIKES A MOVIE
 export const createUserLikesMovie = async (tmdbId, username) => {
-    const user = await findUserByUsername(username); // use this to get user object
-    const userId = user._id  // use this to get user Id
+    // const user = await findUserByUsername(username); // use this to get user object
+    // const userId = user._id  // use this to get user Id
     // console.log(`userId: ${userId}`);
     // console.log(`userId: ${userId._id}`);
-    model.create({ userId: userId, username: username, tmdbId: tmdbId });
+    model.create({ username: username, tmdbId: tmdbId });
 }
 // USER REMOVE LIKE FROM MOVIE
 export const deleteUserLikesMovie = (tmdbId, username) =>
