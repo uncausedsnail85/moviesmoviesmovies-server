@@ -24,5 +24,5 @@ export const findUsernamesThatLikeMovie = (tmdbId) =>
     // select only returns 'username'. -_id removes _id
 
 // FIND ALL THE MOVIES A USER LIKES (FOR HOME PAGE)
-export const findAllMoviesUserLikes = (tmdbId) =>
-    model.find({ tmdbId: tmdbId });
+export const findAllMoviesUserLikes = (username) =>
+    model.find({ username: username }).select('tmdbId -_id');

@@ -23,13 +23,17 @@ function LikesRoutes(app) {
     };
 
 
-    const findAllMoviesUserLikes = async (req, res) => {};
+    const findAllMoviesUserLikes = async (req, res) => {
+        const username = req.params.username;
+        const movies = await dao.findAllMoviesUserLikes(username);
+        res.json(movies);
+    };
 
     app.get("/api/likes", findAllLikes);
     app.post("/api/users/:username/likes/:tmdbId", createUserLikesMovie);
     app.delete("/api/users/:username/likes/:tmdbId", deleteUserLikesMovie); 
     app.get("/api/likes/:tmdbId/users", findUsernamesThatLikeMovie);
-    app.get("/api/users/username/likes", findAllMoviesUserLikes);
+    app.get("/api/users/:username/likes", findAllMoviesUserLikes);
 
 }
 export default LikesRoutes;

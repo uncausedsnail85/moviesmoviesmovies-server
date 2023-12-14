@@ -39,10 +39,19 @@ function UserRoutes(app) {
         // req.session['currentUser'] = currentUser; // do not login after signup
         res.json(currentUser);
     };
+    const updateUser = async (req, res) => {
+        const { username } = req.params;
+        const status = await dao.updateUser(username, req.body);
+        const currentUser = await dao.findUserByUsername(username); // PROBLEM HERE
+        req.session['currentUser'] = currentUser;
+        res.json(status);
+    };
+    
     app.post("/api/users/signup", signup);
     app.post("/api/users/signin", signin);
     app.post("/api/users/signout", signout);
     app.post("/api/users/account", account);
+    app.put("/api/users/:username", updateUser);
 
 
     // CREATE NEW USER - SW
