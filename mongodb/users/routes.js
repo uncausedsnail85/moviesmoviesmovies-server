@@ -28,7 +28,18 @@ function UserRoutes(app) {
     const account = async (req, res) => {
         res.json(req.session['currentUser']);
     };
-    // app.post("/api/users/signup", signup);
+    const signup = async (req, res) => {
+        const user = await dao.findUserByUsername(
+            req.body.username);
+        if (user) {
+            res.status(400).json(
+                { message: "Username already taken" });
+        }
+        const currentUser = await dao.createUser(req.body);
+        // req.session['currentUser'] = currentUser; // do not login after signup
+        res.json(currentUser);
+    };
+    app.post("/api/users/signup", signup);
     app.post("/api/users/signin", signin);
     app.post("/api/users/signout", signout);
     app.post("/api/users/account", account);
