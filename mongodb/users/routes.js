@@ -46,12 +46,17 @@ function UserRoutes(app) {
         req.session['currentUser'] = currentUser;
         res.json(status);
     };
-    
+    const deleteUser = async (req, res) => {
+        const status = await dao.deleteUser(req.params.username);
+        res.json(status);
+    };
+
     app.post("/api/users/signup", signup);
     app.post("/api/users/signin", signin);
     app.post("/api/users/signout", signout);
     app.post("/api/users/account", account);
     app.put("/api/users/:username", updateUser);
+    app.delete("/api/users/:username", deleteUser);
 
 
     // CREATE NEW USER - SW

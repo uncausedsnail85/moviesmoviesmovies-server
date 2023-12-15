@@ -10,10 +10,12 @@ export const findUserByUsername = (username) => model.findOne({ username: userna
 
 export const findUserByCredentials = (username, password) => model.findOne({ username: username, password: password });
 
-export const findUsersByRole = (role) => model.find({role: role});
+export const findUsersByRole = (role) => model.find({ role: role });
 
 export const updateUser = (username, user) =>
     model.updateOne({ username: username }, { $set: user });
+
+export const deleteUser = (username) => model.deleteOne({ username: username });
 
 // export const createUser = () => model.find();
 // export const updateUser = () => model.find();
