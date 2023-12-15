@@ -7,13 +7,28 @@ function LikesRoutes(app) {
     const createUserLikesMovie = async (req, res) => {
         const username = req.params.username;
         const tmdbId = req.params.tmdbId;
-        const likes = await dao.createUserLikesMovie(tmdbId, username);
-        res.json(likes);
+        try {
+            const likes = await dao.createUserLikesMovie(tmdbId, username);
+            res.json(likes);
+        } catch (error) {
+            // Handle the error gracefully
+            res.status(400).json({ message: error.message });
+        }
     };
         
 
 
-    const deleteUserLikesMovie = async (req, res) => {};
+    const deleteUserLikesMovie = async (req, res) => {
+        const username = req.params.username;
+        const tmdbId = req.params.tmdbId;
+        try {
+            await dao.deleteUserLikesMovie(tmdbId, username);
+            res.status(200).send({ message: 'Like successfully deleted' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    };
 
 
     const findUsernamesThatLikeMovie = async (req, res) => {
