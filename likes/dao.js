@@ -1,7 +1,4 @@
 import model from "./model.js";
-import { findUserByUsername } from "../mongodb/users/dao.js";
-
-
 
 
 export const findAllLikes = () => model.find();
@@ -18,7 +15,8 @@ export const createUserLikesMovie = async (tmdbId, username) => {
 
 // USER REMOVE LIKE FROM MOVIE
 export const deleteUserLikesMovie = (tmdbId, username) =>
-    model.deleteOne({ userId: username, tmdbId: tmdbId });
+    model.deleteOne({ username: username, tmdbId: tmdbId });
+
 
 // FIND ALL USERS THAT LIKE THE MOVIE
 export const findUsernamesThatLikeMovie = (tmdbId) =>
