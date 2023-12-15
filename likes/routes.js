@@ -7,8 +7,13 @@ function LikesRoutes(app) {
     const createUserLikesMovie = async (req, res) => {
         const username = req.params.username;
         const tmdbId = req.params.tmdbId;
-        const likes = await dao.createUserLikesMovie(tmdbId, username);
-        res.json(likes);
+        try {
+            const likes = await dao.createUserLikesMovie(tmdbId, username);
+            res.json(likes);
+        } catch (error) {
+            // Handle the error gracefully
+            res.status(400).json({ message: error.message });
+        }
     };
         
 
