@@ -1,13 +1,23 @@
 import * as dao from "./dao.js"
+import { findUserByUsername } from "../mongodb/users/dao.js";
 
 function LikesRoutes(app) {
-    const findAllLikes = async (req, res) => {};
+    const findAllLikes = async (req, res) => { };
 
 
     const createUserLikesMovie = async (req, res) => {
         const username = req.params.username;
         const tmdbId = req.params.tmdbId;
         try {
+            // find if userexists
+            const user = await findUserByUsername(username);
+            console.log(JSON.stringify(user));
+            // if user dont exist throw error
+            if (!user) {
+                throw new Error('User does not exist');
+            }
+
+            // create like
             const likes = await dao.createUserLikesMovie(tmdbId, username);
             res.json(likes);
         } catch (error) {
@@ -15,7 +25,7 @@ function LikesRoutes(app) {
             res.status(400).json({ message: error.message });
         }
     };
-        
+
 
 
     const deleteUserLikesMovie = async (req, res) => {
@@ -46,7 +56,7 @@ function LikesRoutes(app) {
 
     app.get("/api/likes", findAllLikes);
     app.post("/api/users/:username/likes/:tmdbId", createUserLikesMovie);
-    app.delete("/api/users/:username/likes/:tmdbId", deleteUserLikesMovie); 
+    app.delete("/api/users/:username/likes/:tmdbId", deleteUserLikesMovie);
     app.get("/api/likes/:tmdbId/users", findUsernamesThatLikeMovie);
     app.get("/api/users/:username/likes", findAllMoviesUserLikes);
 
